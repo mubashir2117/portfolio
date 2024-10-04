@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #000;
+            padding: 40px;
+            border-radius: 10px;
+            border: 5px solid white;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: red;
+        }
+        h4 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: white;
+            border: 3px solid white;
+            padding: 9px;
+            margin-left: 15px;
+            width: 500px;
+        }
+        
+        .otp-input {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .otp-input input {
+            width: 55px;
+            margin-left: 20px;
+            height: 55px;
+            text-align: center;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        button {
+            padding: 15px 30px;
+            background-color: red;
+            color: white;
+            border: none;
+            font-size: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: green;
+            border: 2px solid white;
+        }
+        p {
+            font-size: 20px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>OTP Verification</h2>
+        <p>Please enter the 6-digit OTP sent to your phone</p>
+        <div class="otp-input">
+            <input type="text" maxlength="1" id="otp1" oninput="moveNext(this, 'otp2')">
+            <input type="text" maxlength="1" id="otp2" oninput="moveNext(this, 'otp3')">
+            <input type="text" maxlength="1" id="otp3" oninput="moveNext(this, 'otp4')">
+            <input type="text" maxlength="1" id="otp4" oninput="moveNext(this, 'otp5')">
+            <input type="text" maxlength="1" id="otp5" oninput="moveNext(this, 'otp6')">
+            <input type="text" maxlength="1" id="otp6" oninput="moveNext(this, '')">
+        </div>
+        <button onclick="verifyOTP()">Verify OTP</button>
+        <h4 id="dom-msg">Result</h4>
+    </div>
+
+    <script>
+        function moveNext(current, nextFieldId) {
+            if (current.value.length === 1 && nextFieldId !== "") {
+                document.getElementById(nextFieldId).focus();
+            }
+        }
+
+        function verifyOTP() {
+            let otp = '';
+            for (let i = 1; i <= 6; i++) {
+                otp += document.getElementById(`otp${i}`).value;
+            }
+
+            const resultElement = document.getElementById('dom-msg');
+
+            if (otp.length === 6) {
+                resultElement.innerHTML = "OTP Verified: " + otp;
+                resultElement.style.color = "green";
+            } else {
+                resultElement.innerHTML = "Please enter a valid 6-digit OTP";
+                resultElement.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
