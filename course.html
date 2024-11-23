@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <title>Course Selling Website UI | AsmrProg</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+img{
+    object-fit: cover;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+.navbar__logo{
+    flex: 1;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.navbar__notch{
+    background: #f7f7f7;
+    padding: 8px 20px 8px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    border-radius: 2rem;
+    border: 1px solid #ccc;
+}
+
+.navbar__notch p{
+    font-size: 0.8rem;
+    font-weight: 500;
+    position: relative;
+}
+
+.navbar__notch p::before{
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -10px;
+}
+
+.navbar__notch a{
+    font-size: 0.9rem;
+    font-weight: 600;
+    position: relative;
+}
+
+.navbar__notch a::before{
+    position: absolute;
+    content: "New";
+    padding: 2px 6px;
+    background: #d85f44;
+    color: #fff;
+    font-size: 0.7rem;
+    border-radius: 10px;
+    top: -18px;
+    right: -12px;
+}
+
+.navbar__menu{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.navbar__menu-link{
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: #f7f7f7;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+.navbar__menu-link:hover,
+.hero-course__mode-option.selected,
+.hero-course__duration-option.selected{
+    background: #edefde;
+    border-color: transparent;
+}
+
+.hero{
+    margin-top: 1.4rem;
+    display: flex;
+    align-items: center;
+    height: calc(100vh - 100px);
+    gap: 3rem;
+    padding: 0 40px;
+}
+
+.hero__image{
+    width: 50%;
+    height: 90%;
+    border-radius: 3rem;
+}
+
+.hero-course{
+    width: 50%;
+}
+
+.hero-course__title{
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-course__author{
+    display: inline;
+    font-weight: 600;
+    margin-right: 1rem;
+}
+
+.hero-course__rating{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.hero-course__stars{
+    display: flex;
+    font-size: 1rem;
+}
+
+.hero-course__reviews{
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.hero-course__label{
+    margin: 1.5rem 0 0.7rem;
+    font-size: 1rem;
+}
+
+.hero-course__mode-option,
+.hero-course__duration-option,
+.hero-course__button{
+    padding: 0.4rem 1rem;
+    margin-left: 0.4rem;
+    border-radius: 2rem;
+    background: #fff;
+    border: 1px solid #ccc;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero-course__mode-option:hover,
+.hero-course__duration-option:hover,
+.hero-course__button:hover{
+    background: #f7f7f7;
+}
+
+.hero-course__actions{
+    margin-top: 2rem;
+}
+
+.hero-course__price{
+    font-weight: 700;
+    margin-left: 1.2rem;
+    font-size: 1.2rem;
+}
+
+.hero-course__price-original{
+    margin-left: 0.6rem;
+    color: #808080;
+    text-decoration: line-through;
+}
+
+.hero-course__button{
+    padding: 0.8rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.hero-course__button--enroll{
+    background: #66bb6a;
+    border-color: transparent;
+    color: #fff;
+}
+
+.hero-course__button--enroll:hover{
+    background: #388e3c;
+}
+
+.separator{
+    display: block;
+    margin: 4rem 0 4rem;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 600;
+    padding: 0 40px;
+}
+
+.program,
+.career{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 0 40px;
+}
+
+.program__image,
+.career__image{
+    width: 45%;
+}
+
+.program__image-photo,
+.career__image-photo{
+    width: 100%;
+    height: 540px;
+    border-radius: 2rem;
+}
+
+.program__info,
+.career__details,
+.about__details{
+    width: 55%;
+}
+
+.program__title,
+.career__title{
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.program__description,
+.career__description{
+    font-size: 0.9rem;
+    margin-bottom: 2.5rem;
+}
+
+.program__details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.program__label{
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.program__duration-list,
+.program__format-list{
+    list-style: none;
+}
+
+.program__duration-item,
+.program__format-item{
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.course-list{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 0 40px;
+}
+
+.course-list__item{
+    width: 25%;
+}
+
+.course-list__item-image{
+    width: 100%;
+    height: 400px;
+    border-radius: 2rem;
+}
+
+.course-list__item-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.6rem 0 1.5rem;
+}
+
+.course-list__item-title,
+.course-list__item-price{
+    font-weight: 600;
+}
+
+.course-list__item-price span{
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.course-list__item-description{
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: justify;
+}
+
+.course-list__item-button{
+    padding: 0.5rem 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.course-list__item-button:hover{
+    background: #ebeddf;
+    border-color: transparent;
+}
+
+.career{
+    margin-top: 5rem;
+}
+
+.career__benefits{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.career__benefit-title{
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.career__benefit-description{
+    font-size: 0.9rem;
+}
+
+.about{
+    background-color: #A7D4FD;
+    background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #A7D4FD 40px), repeating-linear-gradient(#9CCFFA55, #9CCFFA);
+    height: 440px;
+    margin-top: 5rem;
+    border-radius: 3rem;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0rem 2rem 6rem;
+    gap: 5rem;
+    margin: 80px 40px 0 40px;
+}
+
+.about__image{
+    width: 27%;
+    height: 85%;
+    transform: rotate(-10deg);
+    border-radius: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.about__details-title{
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.about__details-description{
+    color: #424242;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.about__details-button{
+    padding: 0.6rem 2rem;
+    border-radius: 2rem;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.about__details-button:hover{
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.gradient{
+    background: linear-gradient(180deg, #fff 0%, #e0f2ff 20%, #b0d4ff 100%);
+    margin-top: 5rem;
+}
+
+.subscription{
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.subscription__title{
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.subscription__description{
+    margin: 1rem 0 2rem;
+}
+
+.subscription__form{
+    position: relative;
+    background: #fff;
+    display: inline;
+    padding: 0.6rem 0.4rem 0.7rem;
+    border-radius: 2rem;
+}
+
+.subscription__input{
+    padding: 0.4rem;
+    width: 320px;
+    border: none;
+    outline: none;
+}
+
+.subscription__button{
+    padding: 0.5rem 0.8rem;
+    border: none;
+    border-radius: 2rem;
+    background: #a2cff8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.subscription__button:hover{
+    background: #83bff5;
+}
+
+.footer{
+    display: flex;
+    flex-direction: column;
+    padding: 0 40px;
+    margin-top: 4rem;
+}
+
+.footer-links{
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer__column{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer__link{
+    transition: all 0.3s ease;
+}
+
+.footer__link:hover{
+    transform: translateX(8px);
+}
+
+.footer__brand-name{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.footer__copyright{
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+    
+    .navbar__notch,
+    .program__image{
+        display: none;
+    }
+
+    .navbar__menu{
+        gap: 0.6rem;
+    }
+
+    .hero-course__mode-option{
+        margin-left: 0 !important;
+    }
+
+    .program{
+        flex-direction: column;
+    }
+
+    .program__info{
+        width: 100%;
+    }
+
+    .program__details{
+        justify-content: space-around;
+    }
+
+    .course-list{
+        flex-wrap: wrap;
+    }
+
+    .course-list__item{
+        width: 46%;
+    }
+
+    .about{
+        padding: 1rem 0rem 1rem 4rem;
+    }
+
+    .about__image{
+        width: 30%;
+        height: 80%;
+    }
+
+    .about__details-title{
+        font-size: 2.2rem;
+    }
+
+    .about__details-description{
+        font-size: 0.9rem;
+    }
+
+    .footer-links{
+        justify-content: space-between;
+    }
+
+}
+
+@media screen and (max-width: 1010px) {
+    
+    .hero{
+        flex-direction: column;
+        height: auto;
+    }
+
+    .hero__image,
+    .hero-course,
+    .career__details,
+    .career__image,
+    .about__details{
+        width: 100%;
+    }
+
+    .hero__image{
+        aspect-ratio: 1/1;
+    }
+
+    .career{
+        flex-direction: column;
+    }
+
+    .about{
+        height: auto;
+        padding: 2rem;
+    }
+
+    .about__image{
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    
+    .navbar{
+        padding: 20px;
+    }
+
+    .hero{
+        padding: 0 20px;
+        gap: 2rem;
+    }
+
+    .hero-course__title{
+        font-size: 1.8rem;
+    }
+
+    .separator{
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .program{
+        padding: 0 20px;
+    }
+
+    .program__title{
+        font-size: 1.6rem;
+    }
+
+    .program__details{
+        flex-direction: column;
+    }
+
+    .program__details-duration,
+    .program__details-format,
+    .course-list__item{
+        width: 100%;
+    }
+    
+    .career{
+        margin-top: 3rem;
+    }
+
+    .career__title{
+        font-size: 1.8rem;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .career__image-photo{
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+
+    .about{
+        margin: 40px 20px 0 20px;
+    }
+
+    .about__details-title{
+        font-size: 1.8rem;
+    }
+
+    .subscription__title{
+        font-size: 2rem;
+    }
+
+    .subscription__description{
+        font-size: 0.9rem;
+    }
+
+    .subscription__input{
+        width: 280px;
+    }
+
+    .footer__branding{
+        display: none;
+    }
+
+    .footer__link{
+        font-size: 0.9rem;
+    }
+
+}
+</style>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="navbar__logo">Logo.</a>
+        <div class="navbar__notch">
+            <p>Home</p>
+            <a href="#">New Courses</a>
+        </div>
+        <div class="navbar__menu">
+            <a href="#" class="navbar__menu-link">Home</a>
+            <a href="#" class="navbar__menu-link">Courses</a>
+            <a href="#" class="navbar__menu-link">Mentorship</a>
+            <a href="#" class="navbar__menu-link">About</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <img src="assets/Mastering.jpg" alt="Hero Image" class="hero__image">
+
+        <div class="hero-course">
+            <h1 class="hero-course__title">Mastering Web Development</h1>
+            <p class="hero-course__author">by - Alex Johnson</p>
+            <div class="hero-course__rating">
+                <div class="hero-course__stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star-half'></i>
+                    <i class='bx bx-star'></i>
+                </div>
+                <div class="hero-course__reviews">(2450 reviews)</div>
+            </div>
+
+            <div class="hero-course__options">
+                <div class="hero-course__mode">
+                    <h3 class="hero-course__label">Select Learning Mode</h3>
+                    <button class="hero-course__mode-option">Self-Study</button>
+                    <button class="hero-course__mode-option selected">Live Led</button>
+                    <button class="hero-course__mode-option">Mentorship</button>
+                    <button class="hero-course__mode-option">Bootcamp</button>
+                </div>
+
+                <div class="hero-course__duration">
+                    <h3 class="hero-course__label">Select Duration</h3>
+                    <button class="hero-course__duration-option">1 Month</button>
+                    <button class="hero-course__duration-option">3 Months</button>
+                    <button class="hero-course__duration-option">6 Months</button>
+                    <button class="hero-course__duration-option selected">1 Year</button>
+                </div>
+
+                <div class="hero-course__pricing">
+                    <h3 class="hero-course__label">Price</h3>
+                    <span class="hero-course__price">$120.00</span>
+                    <span class="hero-course__price-original">$150.00</span>
+                </div>
+
+                <div class="hero-course__actions">
+                    <button class="hero-course__button hero-course__button--enroll">Get Started</button>
+                    <button class="hero-course__button hero-course__button--more">More Details</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <h2 class="separator">Specifications</h2>
+
+    <div class="program">
+        <div class="program__info">
+            <h2 class="program__title">Unlock Your Full Potential</h2>
+            <p class="program__description">
+                Our tailored web development courses are designed to equip you with essential skills and industry
+                insights. With flexible learning modes and durations, you’ll find a path that perfectly fits your needs,
+                from intensive bootcamps to in-depth mentorships.
+            </p>
+
+            <div class="program__details">
+                <div class="program__details-duration">
+                    <h3 class="program__label">Course Durations</h3>
+                    <ul class="program__duration-list">
+                        <li class="program__duration-item">1 Month: Fast-Track Intensive</li>
+                        <li class="program__duration-item">3 Months: Standard Learning Path</li>
+                        <li class="program__duration-item">6 Months: In-Depth Exploration</li>
+                        <li class="program__duration-item">1 Year: Comprehensive Mastery</li>
+                    </ul>
+                </div>
+                <div class="program__details-format">
+                    <h3 class="program__label">Course Durations</h3>
+                    <ul class="program__format-list">
+                        <li class="program__format-item">Self-Paced: Study at your own rhythm</li>
+                        <li class="program__format-item">Instructor-Led: Interactive classes with live feedback</li>
+                        <li class="program__format-item">Mentorship: One-on-one guidance</li>
+                        <li class="program__format-item">Bootcamp: Immersive, hands-on experience</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="program__image">
+            <img src="assets/specifications.jpg" alt="Program Image" class="program__image-photo">
+        </div>
+
+    </div>
+
+    <h2 class="separator">Courses You Might Enjoy</h2>
+
+    <div class="course-list">
+        <div class="course-list__item">
+            <img src="assets/javascript.jpg" alt="Course Image" class="course-list__item-image">
+            <div class="course-list__item-details">
+                <h3 class="course-list__item-title">JavaScript Course</h3>
+                <p class="course-list__item-price"><span>from</span> $52</p>
+            </div>
+            <p class="course-list__item-description">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit sint ad vitae fugiat ducimus in
+                tempore doloribus optio.
+            </p>
+            <button class="course-list__item-button">Quick Enroll</button>
+        </div>
+        <div class="course-list__item">
+            <img src="assets/tailwind.jpg" alt="Course Image" class="course-list__item-image">
+            <div class="course-list__item-details">
+                <h3 class="course-list__item-title">Tailwind Course</h3>
+                <p class="course-list__item-price"><span>from</span> $40</p>
+            </div>
+            <p class="course-list__item-description">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit sint ad vitae fugiat ducimus in
+                tempore doloribus optio.
+            </p>
+            <button class="course-list__item-button">Quick Enroll</button>
+        </div>
+        <div class="course-list__item">
+            <img src="assets/nextjs.jpg" alt="Course Image" class="course-list__item-image">
+            <div class="course-list__item-details">
+                <h3 class="course-list__item-title">NextJs Course</h3>
+                <p class="course-list__item-price"><span>from</span> $38</p>
+            </div>
+            <p class="course-list__item-description">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit sint ad vitae fugiat ducimus in
+                tempore doloribus optio.
+            </p>
+            <button class="course-list__item-button">Quick Enroll</button>
+        </div>
+        <div class="course-list__item">
+            <img src="assets/reactjs.jpg" alt="Course Image" class="course-list__item-image">
+            <div class="course-list__item-details">
+                <h3 class="course-list__item-title">ReactJs Course</h3>
+                <p class="course-list__item-price"><span>from</span> $46</p>
+            </div>
+            <p class="course-list__item-description">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit sint ad vitae fugiat ducimus in
+                tempore doloribus optio.
+            </p>
+            <button class="course-list__item-button">Quick Enroll</button>
+        </div>
+    </div>
+
+    <div class="career">
+        <div class="career__image">
+            <img src="assets/career.jpg" alt="" class="career__image-photo">
+        </div>
+
+        <div class="career__details">
+            <h2 class="career__title">Achieve Your Career Goals with Expert Support</h2>
+            <p class="career__description">
+                Join our mentorship program and benefit from structured guidance tailored to help you succeed. From
+                resources to networking opportunities, we take care of everything so you can focus on mastering your
+                skills.
+            </p>
+
+            <div class="career__benefits">
+                <div class="career__benefit">
+                    <h3 class="career__benefit-title">Personalized Learning</h3>
+                    <p class="career__benefit-description">
+                        Customized curriculum to meet your individual goals.
+                    </p>
+                </div>
+
+                <div class="career__benefit">
+                    <h3 class="career__benefit-title">Global Networking</h3>
+                    <p class="career__benefit-description">
+                        Connect with a community of learners and industry professionals.
+                    </p>
+                </div>
+
+                <div class="career__benefit">
+                    <h3 class="career__benefit-title">Zero Setup Costs</h3>
+                    <p class="career__benefit-description">
+                        Begin without any upfront expenses; all resources are included.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="about">
+        <img src="assets/about.png" alt="About Image" class="about__image">
+        <div class="about__details">
+            <div class="about__details-title">About the Instructor</div>
+            <div class="about__details-description">
+                Alex Johnson brings a wealth of experience in web development, having guided countless students to
+                success in their tech careers. With a background in both teaching and industry expertise, Alex's passion
+                is to make advanced concepts approachable for everyone.
+            </div>
+            <button class="about__details-button">Learn More</button>
+        </div>
+    </div>
+
+
+    <div class="gradient">
+        <div class="subscription">
+            <h2 class="subscription__title">Stay Informed With Our Newsletter</h2>
+            <p class="subscription__description">
+                Sign up to receive insights and updates from our students and experts.
+                Stay connected and discover new ways to enhance your learning experience.
+            </p>
+            <form class="subscription__form">
+                <input type="email" class="subscription__input" placeholder="Enter your email">
+                <button type="submit" class="subscription__button">Subscribe</button>
+            </form>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <div class="footer__branding">
+                    <p class="footer__brand-name">Logo.</p>
+                </div>
+
+                <div class="footer__column">
+                    <a href="#" class="footer__link">Courses</a>
+                    <a href="#" class="footer__link">Mentors</a>
+                    <a href="#" class="footer__link">FAQs</a>
+                    <a href="#" class="footer__link">Contact Us</a>
+                </div>
+
+                <div class="footer__column">
+                    <a href="#" class="footer__link">Blog</a>
+                    <a href="#" class="footer__link">Careers</a>
+                    <a href="#" class="footer__link">Partnerships</a>
+                    <a href="#" class="footer__link">Privacy Policy</a>
+                </div>
+
+                <div class="footer__column">
+                    <a href="#" class="footer__link">Instagram</a>
+                    <a href="#" class="footer__link">Youtube</a>
+                    <a href="#" class="footer__link">Github</a>
+                    <a href="#" class="footer__link">LinkedIn</a>
+                </div>
+
+            </div>
+
+            <p class="footer__copyright">All rights reserved 2024 © AsmrProg</p>
+
+        </footer>
+
+    </div>
+
+
+</body>
+
+</html>
